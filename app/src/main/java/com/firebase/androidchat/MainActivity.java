@@ -22,7 +22,7 @@ import java.util.Random;
 public class MainActivity extends ListActivity {
 
     // TODO: change this to your own Firebase URL
-    private static final String FIREBASE_URL = "https://android-chat.firebaseio-demo.com";
+    private static final String FIREBASE_URL = "https://smashchat.firebaseio.com/";
 
     private String mUsername;
     private Firebase mFirebaseRef;
@@ -34,13 +34,16 @@ public class MainActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Create Database
+        DB firebase = new DB();
+
         // Make sure we have a mUsername
         setupUsername();
 
         setTitle("Chatting as " + mUsername);
 
         // Setup our Firebase mFirebaseRef
-        mFirebaseRef = new Firebase(FIREBASE_URL).child("chat");
+        mFirebaseRef = firebase.db.child("chat");
 
         // Setup our input methods. Enter key on the keyboard or pushing the send button
         EditText inputText = (EditText) findViewById(R.id.messageInput);
